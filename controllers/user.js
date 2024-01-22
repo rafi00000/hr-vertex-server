@@ -1,0 +1,53 @@
+const { ObjectId } = require("mongodb");
+const userModel = require("../models/user");
+
+const handleGetAllUser = async (req, res) => {
+  const result = await userModel.find();
+  return res.json(result);
+};
+
+const handleGetOneUser = async (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  const query = { _id: new ObjectId(id) };
+  try {
+    const result = await userModel.findOne(query);
+    res.send({ message: "success", result });
+  } catch (error) {
+    res.status(500).send({ message: error.message });
+  }
+};
+
+const handlePostUser = async (req, res) => {
+  const name = req.body.name;
+  const email = req.body.email;
+  const gender = req.body.gender;
+  const salary = req.body.salary;
+  const leaves = req.body.leaves;
+  const loan = req.body.loan;
+  const data = { name, email, gender, salary, leaves, loan };
+  try {
+    const result = await userModel.create(data);
+    res.send(result);
+  } catch (err) {
+    res.send({ message: err.message });
+  }
+};
+
+const handleDeleteUser = async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  const result = await userModel.deleteOne(query);
+  if (result) {
+    res.send(result);
+  } else {
+    res.send({ message: "something went wrong! Unsuccessful" });
+  }
+};
+
+module.exports = {
+  handleGetAllUser,
+  handleGetOneUser,
+  handlePostUser,
+  handleDeleteUser,
+};
