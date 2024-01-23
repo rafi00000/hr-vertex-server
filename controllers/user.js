@@ -8,11 +8,10 @@ const handleGetAllUser = async (req, res) => {
 
 const handleGetOneUser = async (req, res) => {
   const id = req.params.id;
-  console.log(id)
   const query = { _id: new ObjectId(id) };
   try {
     const result = await userModel.findOne(query);
-    res.send({ message: "success", result });
+    res.send({ success: true, data: result });
   } catch (error) {
     res.status(500).send({ message: error.message });
   }
@@ -25,10 +24,11 @@ const handlePostUser = async (req, res) => {
   const salary = req.body.salary;
   const leaves = req.body.leaves;
   const loan = req.body.loan;
-  const data = { name, email, gender, salary, leaves, loan };
+  const data = { name, email, gender, salary , leaves, loan };
+
   try {
     const result = await userModel.create(data);
-    res.send(result);
+    res.send({success: true, result});
   } catch (err) {
     res.send({ message: err.message });
   }
@@ -37,12 +37,15 @@ const handlePostUser = async (req, res) => {
 const handleDeleteUser = async (req, res) => {
   const id = req.params.id;
   const query = { _id: new ObjectId(id) };
-  const result = await userModel.deleteOne(query);
-  if (result) {
-    res.send(result);
-  } else {
+  console.log(id)
+  try {
+    const result = await userModel.deleteOne(query);
+    res.send({success: true ,data:result});
+  } catch (error) {
     res.send({ message: "something went wrong! Unsuccessful" });
   }
+  
+  
 };
 
 module.exports = {
