@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+var bcrypt = require('bcryptjs');
+
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -9,6 +11,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         unique: true
+    },
+    password: {
+        type: String,
+        required: true,
     },
     gender: {
         type: String,
@@ -27,6 +33,22 @@ const userSchema = new mongoose.Schema({
         default: 0
     }
 }, {timestamps: true});
+
+userSchema.pre("save", async function(next){
+    const user = this;
+
+    if(!user.isModified("password")){
+        next();
+    }
+
+    try {
+        const saltRound = await bcrypt.genSalt(10);
+        const hash_pass = await bcrypt.hash(user.password, saltRound);
+        user.password = hash_pass;
+    } catch (error) {
+        next(error)
+    }
+})
 
 const userModel = mongoose.model("user", userSchema);
 module.exports = userModel;
