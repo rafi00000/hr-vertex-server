@@ -2,7 +2,7 @@ const Recruitment = require("../models/recruitmentModel");
 
 // get all recruitment
 
-const getAllRecruitment = async(req, res) =>{
+const getAllRecruitment = async (req, res) => {
   const result = await Recruitment.find();
   res.json(result);
 }
@@ -11,32 +11,66 @@ const getAllRecruitment = async(req, res) =>{
 // post the recruitment api
 const postRecruitment = async (req, res) => {
   const {
-      position,
-      department,
-      responsibilities,
-      requirements,
-      applicationDeadline,
-    } = req.body;
+    position,
+    department,
+    responsibilities,
+    requirements,
+    applicationDeadline,
+  } = req.body;
 
-    const newRecruitment = new Recruitment({
-      position,
-      department,
-      responsibilities,
-      requirements,
-      applicationDeadline,
-    });
-    
+  const newRecruitment = new Recruitment({
+    position,
+    department,
+    responsibilities,
+    requirements,
+    applicationDeadline,
+  });
+
   try {
     const savedRecruitment = await newRecruitment.save();
     res.status(201).json(savedRecruitment);
-    
+
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
+// update recruitment
+const updateRecruitment = async (req, res) => {
+  try {
+    const {
+      position,
+      department,
+      responsibilities,
+      requirements,
+      applicationDeadline
+    } = req.body;
+
+    const recruitment = await Recruitment.findById(req.params.id)
+
+    if (!recruitment) {
+      return res.status(404).json({ error: "Recruitment not found" })
+    }
+
+    recruitment.position = position;
+    recruitment.department = department;
+    recruitment.responsibilities = responsibilities;
+    recruitment.requirements = requirements;
+    recruitment.applicationDeadline = applicationDeadline;
+
+    const updatedRecruitment = await recruitment.save()
+
+    res.json(updatedRecruitment)
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Internal Server Error" })
+  }
+}
+
 module.exports = {
   postRecruitment,
-  getAllRecruitment
+  getAllRecruitment,
+  updateRecruitment
 };
