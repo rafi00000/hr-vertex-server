@@ -36,8 +36,6 @@ const postRecruitment = async (req, res) => {
   }
 };
 
-
-
 module.exports = {
   postRecruitment,
   getAllRecruitment
