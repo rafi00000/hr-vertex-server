@@ -29,7 +29,7 @@ const handlePostUser = async (req, res) => {
 
   try {
     const result = await userModel.create(data);
-    res.send({success: true, message: "User created successfully"});
+    res.send({success: true, result});
   } catch (err) {
     res.send({ message: err.message });
   }
