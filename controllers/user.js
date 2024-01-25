@@ -20,11 +20,12 @@ const handleGetOneUser = async (req, res) => {
 const handlePostUser = async (req, res) => {
   const name = req.body.name;
   const email = req.body.email;
+  const password = req.body.password;
   const gender = req.body.gender;
   const salary = req.body.salary;
   const leaves = req.body.leaves;
   const loan = req.body.loan;
-  const data = { name, email, gender, salary , leaves, loan };
+  const data = { name, email, password, gender, salary , leaves, loan };
 
   try {
     const result = await userModel.create(data);
