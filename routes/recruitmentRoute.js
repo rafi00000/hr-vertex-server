@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { postRecruitment } = require("../controllers/recruitmentController");
+const { postRecruitment, getAllRecruitment } = require("../controllers/recruitmentController");
 
-router.post("/", postRecruitment);
+router.post("/", postRecruitment).get("/", getAllRecruitment)
 
 module.exports = router;
