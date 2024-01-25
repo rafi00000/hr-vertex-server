@@ -35,6 +35,26 @@ const handlePostUser = async (req, res) => {
   }
 };
 
+// update user
+
+const handleUpdateUser = async(req,res) =>{
+  const id = req.params.id;
+  const query = {_id: new ObjectId(id)};
+  const data = req.body;
+  const updateDoc = {
+    $set:{
+      ...data
+    }
+  }
+  try {
+    const result = await userModel.updateOne(query, updateDoc);
+    console.log(result)
+    res.json({success: true, message: "Successfully updated"})
+  } catch (error) {
+    res.json({success: false ,message: "something went wrong"})
+  }
+}
+
 const handleDeleteUser = async (req, res) => {
   const id = req.params.id;
   const query = { _id: new ObjectId(id) };
@@ -54,4 +74,5 @@ module.exports = {
   handleGetOneUser,
   handlePostUser,
   handleDeleteUser,
+  handleUpdateUser
 };
