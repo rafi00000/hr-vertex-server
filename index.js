@@ -18,12 +18,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // CONNECTION
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@hrvertex.rr1tlxn.mongodb.net/?retryWrites=true&w=majority`)
-.then(data =>{
-    console.log("db connected")
-})
-.catch(err =>{
-    console.log("error while connecting");
-})
+    .then(data => {
+        console.log("db connected")
+    })
+    .catch(err => {
+        console.log("error while connecting");
+    })
 
 
 // routes
