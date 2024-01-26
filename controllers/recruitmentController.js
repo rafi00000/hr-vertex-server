@@ -1,3 +1,4 @@
+const { ObjectId } = require("mongodb");
 const Recruitment = require("../models/recruitmentModel");
 
 // get all recruitment
@@ -5,17 +6,40 @@ const Recruitment = require("../models/recruitmentModel");
 const getAllRecruitment = async (req, res) => {
   const result = await Recruitment.find();
   res.json(result);
-}
+};
+
+const getSingleRecruitment = async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  try {
+    const result = await Recruitment.findOne(query);
+    res.send(result);
+  } catch (error) {
+    res.status(501).json({ message: "Internal Error" });
+  }
+};
+
+const deleteRecruitment = async (req, res) => {
+  const id = req.params.id;
+  const query = { _id: new ObjectId(id) };
+  try {
+    const result = await Recruitment.deleteOne(query);
+    res.status(201).json({ message: "Deleted Successfully", success: true });
+  } catch (error) {
+    res.status(501).json({ message: "Internal Error" });
+  }
+};
 
 
 // post the recruitment api
 const postRecruitment = async (req, res) => {
   const data = req.body;
-  console.log(data)
+  console.log(data);
   try {
     const savedRecruitment = await Recruitment.create(data);
-    res.status(201).json({message: "Recruitment created successfully", success: true});
-
+    res
+      .status(201)
+      .json({ message: "Recruitment created successfully", success: true });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
@@ -30,13 +54,13 @@ const updateRecruitment = async (req, res) => {
       department,
       responsibilities,
       requirements,
-      applicationDeadline
+      applicationDeadline,
     } = req.body;
 
-    const recruitment = await Recruitment.findById(req.params.id)
+    const recruitment = await Recruitment.findById(req.params.id);
 
     if (!recruitment) {
-      return res.status(404).json({ error: "Recruitment not found" })
+      return res.status(404).json({ error: "Recruitment not found" });
     }
 
     recruitment.position = position;
@@ -45,18 +69,19 @@ const updateRecruitment = async (req, res) => {
     recruitment.requirements = requirements;
     recruitment.applicationDeadline = applicationDeadline;
 
-    const updatedRecruitment = await recruitment.save()
+    const updatedRecruitment = await recruitment.save();
 
-    res.json(updatedRecruitment)
-
+    res.json(updatedRecruitment);
   } catch (error) {
-    console.error(error)
-    res.status(500).json({ error: "Internal Server Error" })
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
 
 module.exports = {
   postRecruitment,
   getAllRecruitment,
-  updateRecruitment
+  updateRecruitment,
+  getSingleRecruitment,
+  deleteRecruitment,
 };
