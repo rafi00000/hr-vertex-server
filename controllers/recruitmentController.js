@@ -69,8 +69,29 @@ const updateRecruitment = async (req, res) => {
   }
 }
 
+// delete recruitment
+const deleteRecruitment = async (req, res) => {
+  try {
+
+    const recruitment = await Recruitment.findById(req.params.id)
+
+    if (!recruitment) {
+      return res.status(404).json({ error: "Recruitment not found" })
+    }
+
+    await recruitment.deleteOne()
+
+    res.json({ message: "Recruitment post deleted successfully" })
+
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 module.exports = {
   postRecruitment,
   getAllRecruitment,
-  updateRecruitment
+  updateRecruitment,
+  deleteRecruitment
 };
