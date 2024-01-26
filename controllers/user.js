@@ -61,12 +61,10 @@ const handleDeleteUser = async (req, res) => {
   console.log(id)
   try {
     const result = await userModel.deleteOne(query);
-    res.send({success: true ,data:result});
+    res.send({ success: true, data:result });
   } catch (error) {
     res.send({ message: "something went wrong! Unsuccessful" });
   }
-  
-  
 };
 
 module.exports = {

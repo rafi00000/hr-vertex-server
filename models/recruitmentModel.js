@@ -5,7 +5,7 @@ const recruitmentSchema = new mongoose.Schema({
     department: String,
     responsibilities: String,
     requirements: String,
-    applicationDeadline: Date,
+    applicationDeadline: String,
 }, {timestamps: true});
 
 const Recruitment = mongoose.model('Recruitment', recruitmentSchema);

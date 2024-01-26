@@ -10,24 +10,10 @@ const getAllRecruitment = async(req, res) =>{
 
 // post the recruitment api
 const postRecruitment = async (req, res) => {
-  const {
-      position,
-      department,
-      responsibilities,
-      requirements,
-      applicationDeadline,
-    } = req.body;
-
-    const newRecruitment = new Recruitment({
-      position,
-      department,
-      responsibilities,
-      requirements,
-      applicationDeadline,
-    });
-    
+  const data = req.body;
+  console.log(data)
   try {
-    const savedRecruitment = await newRecruitment.save();
+    const savedRecruitment = await Recruitment.create(data);
     res.status(201).json(savedRecruitment);
     
   } catch (error) {
