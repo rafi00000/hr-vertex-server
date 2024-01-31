@@ -10,7 +10,7 @@ const { default: mongoose } = require("mongoose");
 
 // middlewares
 app.use(cors({
-    origin: ["https://hr-vertex-client.vercel.app"],
+    origin: ["https://hr-vertex-client.vercel.app", "http://localhost:3000"],
     credentials: true
 }))
 app.use(express.json());
