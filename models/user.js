@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
     loan: {
         type: Number,
         default: 0
+    },
+    role: {
+        type: String,
+        default: "employee",
     }
 }, {timestamps: true});
 

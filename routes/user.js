@@ -9,6 +9,6 @@ const {
 const userRoute = express.Router();
 
 userRoute.route("/").get(handleGetAllUser).post(handlePostUser);
-userRoute.route("/:id").get(handleGetOneUser).delete(handleDeleteUser).put(handleUpdateUser)
+userRoute.route("/:id").get(handleGetOneUser).delete(handleDeleteUser).put(handleUpdateUser);
 
 module.exports = userRoute;
