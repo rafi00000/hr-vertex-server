@@ -11,7 +11,7 @@ const applicationRouter = require('./routes/application');
 // middlewares
 app.use(
   cors({
-    origin: ['https://hr-vertex-client.vercel.app', 'http://localhost:3000'],
+    origin: ['https://hr-vertex-client.vercel.app', 'http://localhost:3000', " * "],
     credentials: true,
   })
 );
