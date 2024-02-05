@@ -35,6 +35,7 @@ mongoose
 app.use('/users', userRoute);
 app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
+app.use("/attendance", applicationRouter);
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));

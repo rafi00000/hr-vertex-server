@@ -1,9 +1,9 @@
 const express = require('express');
-const {  handleApplicationPost, handleGetApplications } = require('../controllers/application');
+const {  handleApplicationPost, handleGetApplications, handleGetOneApplication } = require('../controllers/application');
 const applicationRouter = express.Router()
 
 applicationRouter.route("/").get(handleGetApplications).post(handleApplicationPost)
-applicationRouter.route("/:id")
+applicationRouter.route("/:id").get(handleGetOneApplication).delete()
 
 
 
