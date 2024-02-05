@@ -7,6 +7,7 @@ const userRoute = require('./routes/user');
 const recruitmentRoutes = require('./routes/recruitmentRoute');
 const { default: mongoose } = require('mongoose');
 const applicationRouter = require('./routes/application');
+const courseRoutes = require('./routes/courseRoute')
 
 // middlewares
 app.use(
@@ -35,6 +36,7 @@ mongoose
 app.use('/users', userRoute);
 app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
+app.use('/course', courseRoutes)
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));
