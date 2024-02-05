@@ -6,13 +6,13 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Email: {
+    email: {
         type: String,
         required: true,
-        unique: true
+      
     },
     password: {
-        type: Number,
+        type: String,
         required: true,
     },
     Gender: {
@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     Salary: {
-        type: Number,
+        type: String,
         required: true
     },
     Address: {

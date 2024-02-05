@@ -21,7 +21,7 @@ const handlePostUser = async (req, res) => {
 
 
   const FullName = req.body.FullName;
-  const Email = req.body.Email;
+  const email = req.body.email;
   const password = req.body.password;
   const Gender = req.body.Gender;
   const Salary = req.body.Salary;
@@ -35,7 +35,7 @@ const handlePostUser = async (req, res) => {
 
   const data = {
     FullName,
-    Email,
+    email,
     password,
     Gender,
     Salary,
@@ -46,7 +46,7 @@ const handlePostUser = async (req, res) => {
     photo,
     role,
   };
-
+  console.log(data)
   try {
     const result = await userModel.create(data);
     res.send({ success: true, message: "User created successfully" });
