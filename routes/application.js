@@ -3,7 +3,7 @@ const {  handleApplicationPost, handleGetApplications, handleGetOneApplication }
 const applicationRouter = express.Router()
 
 applicationRouter.route("/").get(handleGetApplications).post(handleApplicationPost)
-applicationRouter.route("/:id").get(handleGetOneApplication).delete()
+applicationRouter.route("/:id").get(handleGetOneApplication)
 
 
 

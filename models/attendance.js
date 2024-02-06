@@ -11,16 +11,19 @@ const attendanceSchema = mongoose.Schema({
         required: true
     },
     department: {
-        type: String
+        type: String,
+        required: true
     },
     clockIn: {
         type: Date,
+        default: Date.now()
     },
     clockOut: {
-        type: Date
+        type: Date,
+        default: Date.now()
     }
 });
 
-const attendanceModel = mongoose.model("attendance", attendanceSchema)
+const attendanceModel = mongoose.model("attendance", attendanceSchema);
 
 module.exports = attendanceModel;
