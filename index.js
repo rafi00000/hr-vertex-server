@@ -8,6 +8,7 @@ const recruitmentRoutes = require('./routes/recruitmentRoute');
 const { default: mongoose } = require('mongoose');
 const applicationRouter = require('./routes/application');
 const holidayroutes = require('./routes/holidays');
+const loanRoutes = require('./routes/loan');
 
 // middlewares
 app.use(
@@ -37,6 +38,7 @@ app.use('/users', userRoute);
 app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
 app.use("/holidays", holidayroutes);
+app.use("/loan", loanRoutes);
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));
