@@ -18,18 +18,20 @@ const handleGetOneUser = async (req, res) => {
 };
 
 const handlePostUser = async (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-  const gender = req.body.gender;
-  const salary = req.body.salary;
-  const leaves = req.body.leaves;
-  const loan = req.body.loan;
+  const { name, email, password, gender, salary , leaves, loan } = req.body;
   const data = { name, email, password, gender, salary , leaves, loan };
+  const newUser = new userModel({
+    name: name,
+    email: email,
+    gender: gender,
+    salary: salary,
+    leaves: leaves,
+    loan: loan
+  });
 
   try {
-    const result = await userModel.create(data);
-    res.send({success: true, message: "User created successfully"});
+    const result = await newUser.save();
+    res.send({success: true, message: "User created successfully", userId: result?._id});
   } catch (err) {
     res.send({ message: err.message });
   }
