@@ -17,6 +17,10 @@ const projectsSchema = new Schema({
         type : Date,
         required: true,
     },
+    'startData':{
+        type : Date,
+        required: true,
+    },
 })
 const Projects = model('project',projectsSchema)
 module.exports = Projects
