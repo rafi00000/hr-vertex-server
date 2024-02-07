@@ -8,7 +8,7 @@ const handleGetAllUser = async (req, res) => {
 
 const handleGetOneUser = async (req, res) => {
   const email = req.params.id;
-  const query = {email: email} ;
+  const query = { email: email };
   try {
     const result = await userModel.findOne(query);
     res.send({ success: true, data: result });
@@ -18,18 +18,10 @@ const handleGetOneUser = async (req, res) => {
 };
 
 const handlePostUser = async (req, res) => {
-  const name = req.body.name;
-  const email = req.body.email;
-  const password = req.body.password;
-  const gender = req.body.gender;
-  const salary = req.body.salary;
-  const leaves = req.body.leaves;
-  const loan = req.body.loan;
-  const data = { name, email, password, gender, salary , leaves, loan };
-
+  const data = req.body;
   try {
     const result = await userModel.create(data);
-    res.send({success: true, message: "User created successfully"});
+    res.send({ success: true, message: "User created successfully" });
   } catch (err) {
     res.send({ message: err.message });
   }
@@ -37,21 +29,21 @@ const handlePostUser = async (req, res) => {
 
 // update user
 
-const handleUpdateUser = async(req,res) =>{
+const handleUpdateUser = async (req, res) => {
   const id = req.params.id;
-  const query = {_id: new ObjectId(id)};
+  const query = { _id: new ObjectId(id) };
   const data = req.body;
   const updateDoc = {
-    $set:{
+    $set: {
       ...data
     }
   }
   try {
     const result = await userModel.updateOne(query, updateDoc);
     console.log(result)
-    res.json({success: true, message: "Successfully updated"})
+    res.json({ success: true, message: "Successfully updated" })
   } catch (error) {
-    res.json({success: false ,message: "something went wrong"})
+    res.json({ success: false, message: "something went wrong" })
   }
 }
 
@@ -61,7 +53,7 @@ const handleDeleteUser = async (req, res) => {
   console.log(id)
   try {
     const result = await userModel.deleteOne(query);
-    res.send({ success: true, data:result });
+    res.send({ success: true, data: result });
   } catch (error) {
     res.send({ message: "something went wrong! Unsuccessful" });
   }

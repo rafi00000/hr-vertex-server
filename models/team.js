@@ -1,6 +1,3 @@
-teamname,
-teamdepartment,
-leader
 const { Schema, model } = require("mongoose");
 
 const teamSchema = new Schema({

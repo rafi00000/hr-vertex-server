@@ -9,6 +9,8 @@ const { default: mongoose } = require('mongoose');
 const applicationRouter = require('./routes/application');
 const holidayroutes = require('./routes/holidays');
 const loanRoutes = require('./routes/loan');
+const courseRoutes = require('./routes/courseRoute')
+
 const projectRoute = require('./routes/projects');
 const teamRoute = require('./routes/team');
 
@@ -41,6 +43,7 @@ app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
 app.use("/holidays", holidayroutes);
 app.use("/loan", loanRoutes);
+app.use('/course', courseRoutes)
 app.use("/projects", projectRoute);
 app.use("/team", teamRoute);
 
