@@ -6,7 +6,7 @@ const handleGetApplications = async(req,res) =>{
         const result = await applicationModel.find();
         res.send(result);
     } catch (error) {
-        res.status(501).send({msg: "something went wrong"})
+        res.status(500).send({msg: "something went wrong"})
     }
 }
 
@@ -16,7 +16,7 @@ const handleApplicationPost = async(req, res) =>{
         const result= applicationModel.create(data);
         res.send({success: true, msg: "Posted Successfully"});
     } catch (error) {
-        res.status(501).send({msg: "something went wrong"});
+        res.status(500).send({msg: "something went wrong"});
     }
 }
 
@@ -39,7 +39,7 @@ const handleDeleteApplication = async(req, res) =>{
         const result = await applicationModel.deleteOne(query);
         res.status(200).send({msg: "successfully deleted", success: true});
     } catch (error) {
-        res.status(501).send({msg: "something went wrong", success: false})
+        res.status(500).send({msg: "something went wrong", success: false})
     }
 }
 

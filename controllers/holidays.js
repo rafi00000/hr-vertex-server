@@ -7,7 +7,7 @@ const postHoliday = async (req, res) => {
         const result = await holidays.create(data);
         res.send({ success: true, msg: "Posted Successfully" }) 
     } catch (error) {
-        res.status(501).send({msg: "Something went wrong", success: false})
+        res.status(500).send({msg: "Something went wrong", success: false})
     }
 }
 
@@ -18,7 +18,7 @@ const getHoliday = async (req, res) => {
         res.send(result)
     } catch (error) {
         console.log(error)
-        res.status(501).send({ msg: "something went wrong" })
+        res.status(500).send({ msg: "something went wrong" })
     }
 }
 

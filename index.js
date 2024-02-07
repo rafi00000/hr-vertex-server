@@ -13,7 +13,6 @@ const attendanceRouter = require('./routes/attendance');
 const departmentRouter = require('./routes/department');
 const holidayroutes = require('./routes/holidays');
 const loanRoutes = require('./routes/loan');
-const courseRoutes = require('./routes/courseRoute')
 
 
 // middlewares
@@ -43,15 +42,11 @@ mongoose
 app.use('/users', userRoute);
 app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
-app.use("/holidays", holidayRoutes);
 app.use('/course', courseRoutes);
 app.use("/attendance", attendanceRouter);
 app.use("/holidays", holidayRoutes);
-app.use('/course', courseRoutes);
 app.use("/departments", departmentRouter);
-app.use("/holidays", holidayroutes);
 app.use("/loan", loanRoutes);
-app.use('/course', courseRoutes)
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));
