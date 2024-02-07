@@ -10,6 +10,7 @@ const applicationRouter = require('./routes/application');
 const holidayRoutes = require('./routes/holidays');
 const courseRoutes = require('./routes/courseRoute');
 const attendanceRouter = require('./routes/attendance');
+const departmentRouter = require('./routes/department');
 
 // middlewares
 app.use(
@@ -43,6 +44,7 @@ app.use('/course', courseRoutes);
 app.use("/attendance", attendanceRouter);
 app.use("/holidays", holidayRoutes);
 app.use('/course', courseRoutes);
+app.use("/departments", departmentRouter);
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));

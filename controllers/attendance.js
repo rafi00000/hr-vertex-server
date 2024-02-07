@@ -29,7 +29,7 @@ const handleGetAttendance = async(req, res) =>{
     console.log(query)
 
     try {
-        const result = await attendanceModel.find();
+        const result = await attendanceModel.find(query);
             res.status(200).send(result);
         } catch (error) {
             res.status(501).send({msg: "something went wrong"});
