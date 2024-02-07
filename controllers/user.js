@@ -19,6 +19,7 @@ const handleGetOneUser = async (req, res) => {
 
 const handlePostUser = async (req, res) => {
   const data = req.body;
+  console.log(data);
   try {
     const result = await userModel.create(data);
     res.send({ success: true, message: "User created successfully" });
