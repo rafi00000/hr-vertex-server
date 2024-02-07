@@ -38,7 +38,6 @@ mongoose
 app.use('/users', userRoute);
 app.use('/recruitment', recruitmentRoutes);
 app.use("/applications", applicationRouter);
-app.use("/attendance", applicationRouter);
 app.use("/holidays", holidayRoutes);
 app.use('/course', courseRoutes);
 app.use("/attendance", attendanceRouter);

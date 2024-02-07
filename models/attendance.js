@@ -12,15 +12,30 @@ const attendanceSchema = mongoose.Schema({
     },
     department: {
         type: String,
+        default: "null",
         required: true
     },
+    date: {
+        type: String,
+    },
+    month: String,
     clockIn: {
         type: Date,
-        default: Date.now()
+        default: () =>{
+            let local = new Date();
+            let offset = local.getTimezoneOffset();
+            let utc = new Date(local.getTime() - offset * 60000);
+            return utc;
+        }
     },
     clockOut: {
         type: Date,
-        default: Date.now()
+        default: () =>{
+            let local = new Date();
+            let offset = local.getTimezoneOffset();
+            let utc = new Date(local.getTime() - offset * 60000);
+            return utc;
+        }
     }
 });
 
