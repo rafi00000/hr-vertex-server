@@ -2,25 +2,23 @@ const { ObjectId } = require("mongodb");
 const departmentModel = require("../models/department");
 
 
-const handleGetAllDepartment  = async(req,res) =>{
-    const {p, l, s} = req.query;
-    console.log(req.query)
-    const page = parseInt(req.query.p) || 1;
-    const limit = parseInt(req.query.l) || 10;
-    const skip = (page - 1) * limit;
-    let query = {}
-    if(s){
-        query = { dept_name: { $regex: new RegExp(s, 'i') } }
-    }
-    console.log(query)
+const handleGetAllDepartment = async (req, res) => {
     try {
+        const { p = 1, l = 10, s } = req.query;
+        const page = parseInt(p, 10);
+        const limit = parseInt(l, 10);
+        const skip =  page * limit;
+        console.log({p,l,s})
+
+        const query = s ? { dept_name: { $regex: new RegExp(s, 'i') } } : {};
+
         const result = await departmentModel.find(query).skip(skip).limit(limit);
         res.status(200).send(result);
     } catch (error) {
-        res.status(500).send({msg: "something went wrong"});
+        console.error(error);
+        res.status(500).send({ msg: "Something went wrong", error: error.message });
     }
-}
-
+};
 
 const handleGetItemNumber = async(req, res) =>{
     try {
