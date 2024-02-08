@@ -13,6 +13,11 @@ const teamSchema = new Schema({
         type :Schema.Types.ObjectId,
         ref: 'user'
     },
+    'members':{
+        type :[Schema.Types.ObjectId],
+        ref: 'user',
+        required: false,
+    },
 })
 const team = model('team',teamSchema)
 module.exports = team
