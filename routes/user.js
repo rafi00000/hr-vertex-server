@@ -5,10 +5,12 @@ const {
   handlePostUser,
   handleDeleteUser,
   handleUpdateUser,
+  handleGetEmployeeNames,
 } = require("../controllers/user");
 const userRoute = express.Router();
 
 userRoute.route("/").get(handleGetAllUser).post(handlePostUser);
 userRoute.route("/:id").get(handleGetOneUser).delete(handleDeleteUser).put(handleUpdateUser);
+userRoute.route("/emp_name").get(handleGetEmployeeNames)
 
 module.exports = userRoute;

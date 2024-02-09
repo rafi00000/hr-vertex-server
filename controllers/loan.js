@@ -12,7 +12,7 @@ const LoanGet = async (req, res) => {
         res.send(result)
     } catch (error) {
         console.log(error)
-        res.status(501).send({ msg: "something went wrong" })
+        res.status(500).send({ msg: "something went wrong" })
     }
 }
 module.exports = LoanGet

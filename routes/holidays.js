@@ -1,8 +1,7 @@
 const express = require('express');
-const GetHoliday = require('../controllers/holidays')
-const PostHoliday = require('../controllers/holidays')
+const {getHoliday, postHoliday} = require('../controllers/holidays')
 
-const holidayroutes = express.Router()
-holidayroutes.route("/").post(PostHoliday).get(GetHoliday)
+const holidayRoutes = express.Router()
+holidayRoutes.route("/").get(getHoliday).post(postHoliday);
 
-module.exports = holidayroutes
+module.exports = holidayRoutes;

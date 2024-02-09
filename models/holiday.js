@@ -12,7 +12,8 @@ const holidaySchema = new Schema({
     'date':{
         type : Date,
         required: true,
+        default: Date.now()
     },
 })
-const holidays = model('holiday',holidaySchema)
-module.exports = holidays
+const holidays = model('holiday', holidaySchema)
+module.exports = holidays;

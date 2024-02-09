@@ -60,10 +60,28 @@ const handleDeleteUser = async (req, res) => {
   }
 };
 
+const handleGetEmployeeNames = async(req, res) =>{
+  const pipeline = [
+    {
+      $project: {
+        FullName: 1
+      }
+    }
+  ]
+  try {
+    const result = await userModel.aggregate(pipeline);
+    console.log(result)
+    res.send(result)
+  } catch (error) {
+    res.status(500).send({msg: "error"})
+  }
+}
+
 module.exports = {
   handleGetAllUser,
   handleGetOneUser,
   handlePostUser,
   handleDeleteUser,
-  handleUpdateUser
+  handleUpdateUser,
+  handleGetEmployeeNames
 };
