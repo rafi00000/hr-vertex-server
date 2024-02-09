@@ -8,6 +8,7 @@ const handleGetAllUser = async (req, res) => {
 
 const handleGetOneUser = async (req, res) => {
   const email = req.params.id;
+  console.log(email);
   const query = {email: email} ;
   try {
     const result = await userModel.findOne(query);

@@ -20,6 +20,19 @@ const handleGetAllDepartment = async (req, res) => {
     }
 };
 
+
+const handleGetOneDepartment = async(req, res) =>{
+    const id = req.params.id;
+    const query = {_id: new ObjectId(id)}
+    console.log(query)
+    try {
+        const result = await departmentModel.findOne(query)
+        res.status(200).send(result);
+    } catch (error) {
+        res.status(500).send({msg: "Coudn't find any"})
+    }
+}
+
 const handleGetItemNumber = async(req, res) =>{
     try {
         const result = await departmentModel.estimatedDocumentCount();
@@ -50,24 +63,31 @@ const handleUpdateDepartment = async(req, res) =>{
         }
     }
     try {
-        const result = departmentModel.updateOne(query, updateDoc);
+        const result = await departmentModel.updateOne(query, updateDoc);
         res.status(200).send({msg: "Updated Successfully", success: true});
     } catch (error) {
         res.status(500).send({msg: "Something went wrong", success: false});
     }
 }
 
-const handleDeleteDepartment = async(req, res) =>{
+const handleDeleteDepartment = async (req, res) => {
     const id = req.params.id;
-    const query = {_id: new ObjectId(id)};
+    console.log(id);
+    const query = { _id: new ObjectId(id) };
+
     try {
         const result = await departmentModel.deleteOne(query);
-        res.status(200).send({msg: "Deleted Successfully", success: true});
-    } catch (error) {
-        res.status(500).send({msg: "Something went wrong", success: false});
-    }
-}
 
+        if (result.deletedCount === 1) {
+            res.status(200).send({ msg: "Deleted Successfully", success: true });
+        } else {
+            res.status(404).send({ msg: "No matching document found", success: false });
+        }
+    } catch (error) {
+        console.error(error); // Log the error for debugging
+        res.status(500).send({ msg: "Something went wrong", success: false });
+    }
+};
 
 
 
@@ -76,5 +96,6 @@ module.exports = {
     handlePostingDepartment,
     handleDeleteDepartment,
     handleUpdateDepartment,
-    handleGetItemNumber
+    handleGetItemNumber,
+    handleGetOneDepartment
 }

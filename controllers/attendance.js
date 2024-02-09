@@ -6,19 +6,19 @@ const handleGetAttendance = async(req, res) =>{
 
     let query = {}
     if(name && date && month){
-        query = {name: name, date: date, month: month}
+        query = {name: { $regex: new RegExp(name, 'i') }, date: date, month: month}
     }
     else if(name && date){
-        query = {name: name, date: date}
+        query = {name: { $regex: new RegExp(name, 'i') }, date: date}
     }
     else if(name && month){
-        query = {name: name, month: month}
+        query = {name: { $regex: new RegExp(name, 'i') }, month: month}
     }
     else if (month && date){
         query = {month: month, date: date}
     }
     else if(name){
-        query = {name: name}
+        query = {name: { $regex: new RegExp(name, 'i') }}
     }
     else if (date){
         query = {date: date}
@@ -38,6 +38,7 @@ const handleGetAttendance = async(req, res) =>{
 
 const handleAttendancePost = async(req, res) =>{
     const data = req.body;
+    console.log(data)
     const date = data.date;
     try {
         const result = await attendanceModel.create({...data, date});
