@@ -11,9 +11,10 @@ const holidayRoutes = require('./routes/holidays');
 const courseRoutes = require('./routes/courseRoute');
 const attendanceRouter = require('./routes/attendance');
 const departmentRouter = require('./routes/department');
-const holidayroutes = require('./routes/holidays');
 const loanRoutes = require('./routes/loan');
 
+const projectRoute = require('./routes/projects');
+const teamRoute = require('./routes/team');
 
 // middlewares
 app.use(
@@ -47,6 +48,8 @@ app.use("/attendance", attendanceRouter);
 app.use("/holidays", holidayRoutes);
 app.use("/departments", departmentRouter);
 app.use("/loan", loanRoutes);
+app.use("/projects", projectRoute);
+app.use("/team", teamRoute);
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));
