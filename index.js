@@ -29,7 +29,7 @@ app.use(express.urlencoded({ extended: true }));
 // CONNECTION
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@hrvertex.rr1tlxn.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://hrVertexserver:hrvertexserver7712@hrvertex.rr1tlxn.mongodb.net/?retryWrites=true&w=majority`
   )
   .then((data) => {
     console.log('db connected');

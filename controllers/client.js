@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const userModel = require("../models/user");
+const userModel = require("../models/client");
 
 const handleGetAllUser = async (req, res) => {
   const result = await userModel.find();
@@ -20,36 +20,29 @@ const handleGetOneUser = async (req, res) => {
 const handlePostUser = async (req, res) => {
 
 
-  const FullName = req.body.FullName;
+  const FirstName = req.body.FirstName;
+  const LastName = req.body.LastName;
   const email = req.body.email;
   const password = req.body.password;
-  const Gender = req.body.Gender;
-  const Salary = req.body.Salary;
-  const Address = req.body.Address;
-  const Designation = req.body.Designation;
-  const JoiningDate = req.body.JoiningDate;
-  const PhoneNumber = req.body.PhoneNumber;
-  const photo = req.body.photo;
-  const role = req.body.role;
+  const Company = req.body.Company;
+  const Phone = req.body.Phone;
+  const ClientId = req.body.ClientId;
+ 
 
 
   const data = {
-    FullName,
+    FirstName,
+    LastName,
     email,
     password,
-    Gender,
-    Salary,
-    Address,
-    Designation,
-    JoiningDate,
-    PhoneNumber,
-    photo,
-    role,
+    Company,
+    Phone,
+    ClientId
   };
   console.log(data)
   try {
     const result = await userModel.create(data);
-    res.send({ success: true, message: "User created successfully" });
+    res.send({ success: true, message: "client created successfully" });
   } catch (err) {
     res.send({ message: err.message });
   }
@@ -87,28 +80,10 @@ const handleDeleteUser = async (req, res) => {
   }
 };
 
-const handleGetEmployeeNames = async(req, res) =>{
-  const pipeline = [
-    {
-      $project: {
-        FullName: 1
-      }
-    }
-  ]
-  try {
-    const result = await userModel.aggregate(pipeline);
-    console.log(result)
-    res.send(result)
-  } catch (error) {
-    res.status(500).send({msg: "error"})
-  }
-}
-
 module.exports = {
   handleGetAllUser,
   handleGetOneUser,
   handlePostUser,
   handleDeleteUser,
-  handleUpdateUser,
-  handleGetEmployeeNames
+  handleUpdateUser
 };
