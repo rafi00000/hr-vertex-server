@@ -15,7 +15,7 @@ const getSingleRecruitment = async (req, res) => {
     const result = await Recruitment.findOne(query);
     res.send(result);
   } catch (error) {
-    res.status(501).json({ message: "Internal Error" });
+    res.status(500).json({ message: "Internal Error" });
   }
 };
 
@@ -26,7 +26,7 @@ const deleteRecruitment = async (req, res) => {
     const result = await Recruitment.deleteOne(query);
     res.status(201).json({ message: "Deleted Successfully", success: true });
   } catch (error) {
-    res.status(501).json({ message: "Internal Error" });
+    res.status(500).json({ message: "Internal Error" });
   }
 };
 
