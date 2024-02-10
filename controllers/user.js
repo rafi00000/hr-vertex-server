@@ -5,6 +5,10 @@ const handleGetAllUser = async (req, res) => {
   const result = await userModel.find();
   return res.json(result);
 };
+const handleGethasteamUser = async (req, res) => {
+  const result = await userModel.find({ team: 'none' });
+  return res.json(result);
+};
 
 const handleGetOneUser = async (req, res) => {
   const email = req.params.id;
@@ -110,5 +114,6 @@ module.exports = {
   handlePostUser,
   handleDeleteUser,
   handleUpdateUser,
-  handleGetEmployeeNames
+  handleGetEmployeeNames,
+  handleGethasteamUser
 };

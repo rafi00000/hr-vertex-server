@@ -12,7 +12,6 @@ const courseRoutes = require('./routes/courseRoute');
 const attendanceRouter = require('./routes/attendance');
 const departmentRouter = require('./routes/department');
 const loanRoutes = require('./routes/loan');
-
 const projectRoute = require('./routes/projects');
 const teamRoute = require('./routes/team');
 
