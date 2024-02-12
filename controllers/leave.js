@@ -1,12 +1,13 @@
 const { ObjectId } = require("mongodb");
-const loan = require("../models/loan");
 const userModel = require("../models/user");
-const LoanPost = async (req, res) => {
+const leave = require("../models/leave");
+const LeavePost = async (req, res) => {
     const data = req.body;
-    const result = await loan.create(data)
+    const result = await leave.create(data)
+    console.log(result)
     res.send({ success: true, msg: "Posted Successfully" })
 }
-const LoanGet = async (req, res) => {
+const leaveGet = async (req, res) => {
     const { user } = req.query;
     if (!user) {
         return res.status(501).send({ msg: "something went wrong user not found" })
@@ -19,7 +20,7 @@ const LoanGet = async (req, res) => {
         } else {
             filter = { user: new ObjectId(Requesteduser?._id) }
         }
-        const result = await loan.find(filter).populate({
+        const result = await leave.find(filter).populate({
             path: 'user',
             select: '_id email FullName photo'
         })
@@ -29,4 +30,4 @@ const LoanGet = async (req, res) => {
         res.status(501).send({ msg: "something went wrong" })
     }
 }
-module.exports = { LoanGet, LoanPost }
+module.exports = { leaveGet, LeavePost }

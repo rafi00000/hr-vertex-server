@@ -13,6 +13,7 @@ const courseRoutes = require('./routes/courseRoute')
 
 const projectRoute = require('./routes/projects');
 const teamRoute = require('./routes/team');
+const leaveRoutes = require('./routes/leave');
 
 // middlewares
 app.use(
@@ -46,6 +47,7 @@ app.use("/loan", loanRoutes);
 app.use('/course', courseRoutes)
 app.use("/projects", projectRoute);
 app.use("/team", teamRoute);
+app.use("/leave", leaveRoutes);
 
 // for run test
 app.get('/', (req, res) => res.send('Server is running'));

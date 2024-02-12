@@ -5,7 +5,6 @@ const PostHoliday = async (req, res) => {
     const result = await holidays.create(data)
     res.send({ success: true, msg: "Posted Successfully" })
 }
-module.exports = PostHoliday
 const GetHoliday = async (req, res) => {
     try {
         const result = await holidays.find({})
@@ -15,4 +14,4 @@ const GetHoliday = async (req, res) => {
         res.status(501).send({ msg: "something went wrong" })
     }
 }
-module.exports = GetHoliday
+module.exports = {PostHoliday,GetHoliday}
